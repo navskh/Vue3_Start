@@ -1,48 +1,43 @@
 <template>
 	<div>
-		<h2>{{ teacher.name }}</h2>
-		<h3>강의가 있습니까?</h3>
-		<!-- <p>{{ teacher.lectures.length > 0 ? '있음' : '없음' }}</p> -->
-		<p>{{ hasLecture }}</p>
-		<p>{{ existLecture() }}</p>
-		<h2>이름</h2>
-		<p>{{ fullName }}</p>
+		<ul>
+			<template v-for="(item, index) in evenItems" :key="item.id">
+				<!-- <li v-if="item.id % 2 === 0"> -->
+				<li>인덱스 : {{ index }} , {{ item.message }}</li>
+			</template>
+		</ul>
+		<hr />
+		<ul>
+			<li v-for="(value, key, index) in myObject" :key="key">
+				{{ index }} - {{ key }} - {{ value }}
+			</li>
+		</ul>
 	</div>
 </template>
 
 <script>
-import { reactive, computed, ref } from 'vue';
+import { reactive, computed } from 'vue';
 export default {
 	setup() {
-		const teacher = reactive({
-			name: '짐코딩',
-			lectures: ['HTML/CSS', 'Javascript', 'VUe3'],
+		const items = reactive([
+			{ id: 1, message: 'JAVA' },
+			{ id: 2, message: 'HTML' },
+			{ id: 3, message: 'CSS' },
+			{ id: 4, message: 'javascript' },
+		]);
+
+		const evenItems = computed(() => items.filter(item => item.id % 2 === 0));
+
+		const myObject = reactive({
+			title: '제목',
+			author: '홍길동',
+			publishedAt: '2016-01-06',
 		});
-
-		const hasLecture = computed(() =>
-			teacher.lectures.length > 0 ? '있음' : '없음',
-		);
-
-		const existLecture = () => (teacher.lectures.length > 0 ? '있음' : '없음');
-
-		const firstName = ref('홍');
-		const lastName = ref('길동');
-		const fullName = computed({
-			get() {
-				return firstName.value + ' ' + lastName.value;
-			},
-			set(value) {
-				[firstName.value, lastName.value] = value.split(' ');
-			},
-		});
-
-		fullName.value = '짐 코딩';
 
 		return {
-			teacher,
-			hasLecture,
-			existLecture,
-			fullName,
+			items,
+			evenItems,
+			myObject,
 		};
 	},
 };
