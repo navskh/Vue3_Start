@@ -4,5 +4,7 @@ import App from './App.vue';
 
 import './assets/main.css';
 
-createApp(App).mount('#app');
+const app = createApp(App);
+
+app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';
