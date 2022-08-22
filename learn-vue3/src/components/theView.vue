@@ -17,12 +17,14 @@
 				</div>
 
 				<hr class="my-4" />
-				<LabelInputVue v-model="username" label="이름"></LabelInputVue>
-				<LabelTitle v-model:title="title" label="제목"></LabelTitle>
-				<UsernameVue
-					v-model:firstname="firstname"
-					v-model:lastname="lastname"
-				></UsernameVue>
+				<LabelInputVue
+					v-model="username"
+					label="이름"
+					class="nonclass"
+					style="color: red"
+					id="id"
+					data-id="data"
+				></LabelInputVue>
 			</div>
 		</main>
 	</div>
