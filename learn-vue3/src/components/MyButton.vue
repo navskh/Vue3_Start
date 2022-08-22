@@ -1,5 +1,7 @@
 <template>
-	<div></div>
+	<div>
+		<button type="button" class="btn btn-primary">MyButton</button>
+	</div>
 </template>
 
 <script>

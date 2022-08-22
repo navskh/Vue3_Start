@@ -2,29 +2,19 @@
 	<div>
 		<main>
 			<div class="container py-4">
-				<PostCreate @create-post="createPost"></PostCreate>
-				<hr class="my-4" />
-				<div class="row g-3">
-					<div v-for="post in posts" :key="post.id" class="col col-4">
-						<AppCard
-							:title="post.title"
-							:contents="post.contents"
-							:type="post.type"
-							:isLike="post.isLike"
-							@toggle-like="post.isLike = !post.isLike"
-						></AppCard>
-					</div>
-				</div>
+				<MyButton @click="sayHello"></MyButton>
+				<LabelInput></LabelInput>
 
-				<hr class="my-4" />
-				<LabelInputVue
-					v-model="username"
-					label="이름"
-					class="nonclass"
-					style="color: red"
-					id="id"
-					data-id="data"
-				></LabelInputVue>
+				<hr />
+				<FancyButton>Click!</FancyButton>
+				<AppCardVue>
+					<!-- <template #[slotArgs]> 제목입니다. </template> -->
+					<template #default="{ childMessage }">
+						{{ childMessage }}
+					</template>
+				</AppCardVue>
+				<hr />
+				<AppCardVue>게시글입니다.</AppCardVue>
 			</div>
 		</main>
 	</div>
@@ -32,57 +22,26 @@
 
 <script>
 import { reactive, ref } from 'vue';
-import AppCard from '../components/AppCard.vue';
-import PostCreate from '../components/PostCreate.vue';
-import LabelInputVue from './LabelInput.vue';
-import LabelTitle from './LabelTitle.vue';
-import UsernameVue from './UserName.vue';
+import MyButton from './MyButton.vue';
+import LabelInput from './LabelInput.vue';
+import FancyButton from './FancyButton.vue';
+import PostItem from './PostItem.vue';
+import AppCardVue from './AppCard.vue';
 
 export default {
 	components: {
-		AppCard,
-		PostCreate,
-		LabelInputVue,
-		LabelTitle,
-		UsernameVue,
+		MyButton,
+		LabelInput,
+		FancyButton,
+		AppCardVue,
 	},
 	setup() {
-		const post = reactive({
-			title: '제목2',
-			contents: '내용2',
-		});
-
-		const posts = reactive([
-			{ id: 1, title: '제목1', contents: '내용1', isLike: true, type: 'news' },
-			{ id: 2, title: '제목2', contents: '내용2', isLike: true, type: 'news' },
-			{ id: 3, title: '제목3', contents: '내용3', isLike: true, type: 'news' },
-			{
-				id: 4,
-				title: '제목4',
-				contents: '내용4',
-				isLike: false,
-				type: 'notice',
-			},
-			{
-				id: 5,
-				title: '제목5',
-				contents: '내용5',
-				isLike: false,
-				type: 'notice',
-			},
-		]);
-		const createPost = newPost => {
-			console.log(newPost);
-			posts.push(newPost);
+		const sayHello = () => {
+			alert('안녕하세요');
 		};
 
-		const username = ref('');
-		const title = ref('');
-
-		const firstname = ref('');
-		const lastname = ref('');
-
-		return { post, posts, createPost, username, title, firstname, lastname };
+		const slotArgs = ref('header');
+		return { sayHello, slotArgs };
 	},
 };
 </script>
