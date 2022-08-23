@@ -6,5 +6,6 @@ import './assets/main.css';
 
 const app = createApp(App);
 
+app.provide('app-message', 'app message 입니다.');
 app.mount('#app');
 import 'bootstrap/dist/js/bootstrap.js';
